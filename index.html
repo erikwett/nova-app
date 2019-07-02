@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+  <title>Nebula mashup</title>
+
+  <script src="https://unpkg.com/enigma.js"></script>
+  <script src="https://unpkg.com/@nebula.js/nucleus@next"></script>
+
+	<style>
+    body {
+      background: #eee;
+    }
+
+    .content {
+      margin: 0 auto;
+      width: 80%;
+      max-width: 800px;
+    }
+
+    .object {
+      position: relative;
+      height: 400px;
+      background-color: white;
+    }
+
+    .toolbar {
+      background-color: white;
+      margin: 12px 0px;
+    }
+
+	</style>
+</head>
+<body>
+
+  <div class="content">
+    <div class="toolbar"></div>
+    <div class="object" data-type='foo'></div>
+  </div>
+
+  <script src="connect.js"></script>
+  <script src="index.js"></script>
+</html>

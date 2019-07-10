@@ -1,25 +1,41 @@
-connect('localhost:4848','Consumer Sales.qvf').then((app) => {
-  const sn = {
-    component: {
-      mounted(element) {
-        element.textContent = 'Hello';
-      },
-    },
-  };
+var table = window['nova-table']();
 
-  const nebbie = window.nucleus(app, {
-    load: (type, config) => config.Promise.resolve(sn),
-  });
+connect('localhost:4848', 'Consumer Sales.qvf').then((app) => {
+	const sn = {
+		component: {
+			mounted(element) {
+				element.textContent = 'Hello';
+			},
+		},
+	};
 
-  nebbie.selections().mount(document.querySelector('.toolbar'));
+	const nebbie = window.nucleus(app, {
+		load: (type, config) => config.Promise.resolve(table),
+	});
 
-  document.querySelectorAll('.object').forEach((el) => {
-    const type = el.getAttribute('data-type');
+	nebbie.selections().mount(document.querySelector('.toolbar'));
 
-    nebbie.create({
-      type,
-    }, {
-      element: el,
-    });
-  });
+	nebbie.create({
+		type: 'nova-table',
+	}, {
+		element: document.getElementById('nova01'),
+		properties: {
+			qHyperCubeDef: {
+				qDimensions: [{
+					qDef: {
+						qFieldDefs: ['Customer']
+					}
+				}],
+				qMeasures: [{
+					qDef: {
+						qDef: 'Sum([Sales Amount])'
+					}
+				}],
+				qInitialDataFetch: [{
+					qWidth: 5,
+					qHeight: 1000
+				}]
+			}
+		}
+	});
 });

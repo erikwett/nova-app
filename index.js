@@ -1,6 +1,7 @@
-var table = window['nova-table']();
-
 connect('localhost:4848', 'Consumer Sales.qvf').then((app) => {
+	const novas = {
+		'nova-table': window['nova-table']()
+	};
 	const sn = {
 		component: {
 			mounted(element) {
@@ -10,7 +11,7 @@ connect('localhost:4848', 'Consumer Sales.qvf').then((app) => {
 	};
 
 	const nebbie = window.nucleus(app, {
-		load: (type, config) => config.Promise.resolve(table),
+		load: (type, config) => config.Promise.resolve(novas[type.name] || sn),
 	});
 
 	nebbie.selections().mount(document.querySelector('.toolbar'));
